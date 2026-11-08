@@ -1,0 +1,22 @@
+:root {
+  --font-body: 'Barlow', system-ui, sans-serif;
+  --font-heading: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+
+  --red: #D71920;
+  --black: #121212;
+  --grey-bg: #F3F3F1;
+  --muted: #545454;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--black);
+  background: var(--grey-bg);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+}

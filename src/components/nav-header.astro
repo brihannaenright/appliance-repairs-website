@@ -1,0 +1,155 @@
+---
+const phone = "087 120 0398";
+const phoneLink = "tel:+353871200398";
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About & Reviews" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header class="nav">
+  <div class="nav_inner">
+    <a href="/" class="logo">
+      <span class="logo_badge"></span>
+      <span class="logo_text">
+        <strong>TOM ENRIGHT</strong>
+        <small>DOMESTIC APPLIANCE REPAIRS</small>
+      </span>
+    </a>
+
+    <button class="menu-btn">☰</button>
+
+    <nav id="nav-links" class="links">
+      {
+        links.map(({ href, label }) => (
+          <a href={href} class={current === href ? "active" : ""}>
+            {label}
+          </a>
+        ))
+      }
+      <a href={phoneLink} class="call-btn">
+        📞 Call {phone}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* ---------- Mobile (default) ---------- */
+  .nav {
+    background: #fff;
+    border-bottom: 5px solid var(--red);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--black);
+  }
+  .logo__badge {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    background: var(--red);
+    border-radius: 4px;
+    font-size: 20px;
+  }
+  .logo__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .logo__text strong {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 24px;
+  }
+  .logo__text small {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .menu-btn {
+    background: none;
+    border: 0;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    padding-top: 12px;
+  }
+  .links.open {
+    display: flex;
+  }
+  .links a {
+    padding: 12px 0;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .links a.active {
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  .call-btn {
+    background: var(--red);
+    color: #fff !important;
+    font-weight: 700 !important;
+    padding: 14px 22px !important;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* ---------- Desktop ---------- */
+  @media (min-width: 1024px) {
+    .menu-btn {
+      display: none;
+    }
+    .links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 36px;
+      width: auto;
+      padding: 0;
+    }
+    .call-btn {
+      margin-top: 0;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector(".menu-btn");
+  const links = document.querySelector("#nav-links");
+  btn?.addEventListener("click", () => {
+    const open = links?.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(open));
+  });
+</script>

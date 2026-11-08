@@ -1,0 +1,18 @@
+---
+import Nav from '../components/nav-header.astro';
+import Footer from '../components/nav-footer.astro';
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{"Tom Enright - Domestic Appliance Repairs"}</title>
+  </head>
+  <body>
+    <Nav />
+    <slot />   <!-- each page's content gets inserted here -->
+    <Footer />
+  </body>
+</html>
